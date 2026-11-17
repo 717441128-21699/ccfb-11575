@@ -1,0 +1,14 @@
+{
+  "name": "frame-data-editor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc -p tsconfig.test.json && node dist-test/tests/run.js",
+    "serve": "node server.js"
+  },
+  "devDependencies": {
+    "typescript": "*"
+  }
+}
