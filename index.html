@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>调色板动画编辑器</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>调色板动画编辑器</h1>
+      <div class="actions">
+        <button id="btnNew" title="新建空白画布">新建</button>
+        <button id="btnDemo" title="载入内置演示图(瀑布/火焰/霓虹)">演示图</button>
+        <button id="btnImport" title="导入索引色 PNG(保留原色号)或其他图片(自动量化 256 色)">导入图片</button>
+        <button id="btnOpenProject">打开工程</button>
+        <button id="btnSaveProject">保存工程</button>
+      </div>
+      <div id="status"></div>
+    </header>
+    <main>
+      <section id="canvasArea">
+        <div id="toolbar">
+          <span class="tb-group">
+            <button class="tool active" id="toolPencil" title="画笔 (B)">✏️ 画笔</button>
+            <button class="tool" id="toolFill" title="油漆桶 (F)">🪣 填充</button>
+            <button class="tool" id="toolPicker" title="吸管 (I),右键随时可取色">💧 吸管</button>
+          </span>
+          <span class="tb-group">
+            <button id="btnGrid" title="网格 (G)">▦ 网格</button>
+            <button id="btnUndo" title="撤销 (Ctrl+Z)">↩ 撤销</button>
+          </span>
+          <span class="tb-group">
+            <button id="btnPlay" title="播放/暂停">⏸ 暂停</button>
+            <button id="btnResetTime" title="动画时间归零">⏮ 归零</button>
+          </span>
+          <span class="tb-group">
+            <button id="btnZoomOut">−</button>
+            <span id="zoomLabel">3×</span>
+            <button id="btnZoomIn">＋</button>
+          </span>
+          <span class="tb-group brush-box">
+            当前色 <span id="brushSwatch"></span><span id="brushLabel">#1</span>
+          </span>
+        </div>
+        <div id="canvasWrap">
+          <canvas id="view"></canvas>
+          <div id="hud">
+            <span id="fps">-- fps</span>
+            <span id="posLabel"></span>
+            <span id="sizeLabel"></span>
+          </div>
+        </div>
+      </section>
+      <aside>
+        <section class="panel">
+          <h2>调色板 <small>单击取色 · 拖动框选连续色号</small></h2>
+          <canvas id="paletteView" width="352" height="352"></canvas>
+          <div class="row">
+            <button id="btnNewGroup" disabled>＋ 用选区新建循环组</button>
+            <span id="selLabel"></span>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>循环组 <small>轮转 / 往复 / 渐变,可同时运行</small></h2>
+          <div id="groupList"></div>
+        </section>
+        <section class="panel">
+          <h2>导出</h2>
+          <div class="row">
+            <label><input type="checkbox" id="chkPixels" checked /> 数据含像素</label>
+            <button id="btnExportData" title="给游戏程序的调色板动画数据(JSON)">导出数据 JSON</button>
+          </div>
+          <div class="row">
+            <button id="btnExportPng" title="导出当前帧为 PNG">导出当前帧 PNG</button>
+          </div>
+          <div class="row gif-row">
+            <label>时长(s)<input type="number" id="gifDur" step="0.5" min="0.5" max="30" value="4" /></label>
+            <label>帧率<input type="number" id="gifFps" step="1" min="5" max="50" value="20" /></label>
+            <button id="btnExportGif" title="导出一个完整循环的 GIF">导出 GIF</button>
+          </div>
+          <div id="gifInfo" class="hint"></div>
+        </section>
+      </aside>
+    </main>
+    <input type="file" id="fileImage" accept="image/*" hidden />
+    <input type="file" id="fileProject" accept=".json,application/json" hidden />
+    <script type="module" src="dist/main.js"></script>
+  </body>
+</html>

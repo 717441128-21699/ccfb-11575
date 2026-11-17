@@ -1,0 +1,16 @@
+{
+  "name": "palette-anim-editor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "复古像素游戏调色板循环动画编辑器(瀑布/火焰/霓虹)",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "serve": "node serve.mjs",
+    "test": "npm run build && node test/run-tests.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
